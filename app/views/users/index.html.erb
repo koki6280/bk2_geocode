@@ -25,6 +25,29 @@
 								 <% end %>
 					   </tbody>
 	       </table>
+	        <div id="map" style="height: 500px; width: 500px;"></div>
+              <script>
+              	      var map;
+					      function initMap() {
+					      	geocoder = new google.maps.Geocoder()
+					        map = new google.maps.Map(document.getElementById('map'), {
+					          center: {
+					          	lat: gon.user.latitude,
+					          	lng: gon.user.longitude
+					          },
+					          zoom: 15
+					        });
+
+					        marker = new google.maps.Marker({
+						      position: {
+						      	lat: gon.user.latitude,
+						      	lng: gon.user.longitude
+						      },
+						      map: map
+						    });
+					      }
+              </script>
      </div>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['SECRET_KEY'] %>&callback=initMap" async defer></script>
